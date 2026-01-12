@@ -1,5 +1,3 @@
-# vardrscanner-docs
-Architecture and design documentation for VardrScanner, an OWASP API Top 3–focused security testing framework. Implementation is private.
 # VardrScanner - API Security Testing Framework
 
 [![Python](https://img.shields.io/badge/Python-3.8%2B-blue.svg)](https://www.python.org/)
@@ -30,41 +28,41 @@ This is **architecture documentation**, not a runnable tool. It exists to demons
 ### High-Level Design
 
 ```
-┌──────────────────────────────────────────────┐
-│              VardrScanner                     │
-├──────────────────────────────────────────────┤
-│                                              │
-│  ┌────────────────────────────────────┐    │
-│  │   Core Engine (Transport Layer)    │    │
-│  │   • HTTP session management        │    │
-│  │   • Authentication handlers        │    │
-│  │   • Rate limiting & retry logic    │    │
-│  └────────────┬───────────────────────┘    │
-│               │                              │
-│               ▼                              │
-│  ┌────────────────────────────────────┐    │
-│  │   ScanContext (Abstraction)        │    │
-│  │   • Isolates modules from engine   │    │
-│  │   • Clean interface: request(),    │    │
-│  │     add_finding(), logger          │    │
-│  └────────────┬───────────────────────┘    │
-│               │                              │
-│               ▼                              │
-│  ┌────────────────────────────────────┐    │
-│  │   Security Modules (Plugins)       │    │
-│  │   • API1: BOLA/IDOR                │    │
-│  │   • API2: Broken Authentication    │    │
-│  │   • API3: Property-Level Authz     │    │
-│  └────────────┬───────────────────────┘    │
-│               │                              │
-│               ▼                              │
-│  ┌────────────────────────────────────┐    │
-│  │   Reporting Engine                 │    │
-│  │   • Text, JSON, HTML outputs       │    │
-│  │   • Evidence collection            │    │
-│  └────────────────────────────────────┘    │
-│                                              │
-└──────────────────────────────────────────────┘
+┌───────────────────────────────────────────┐
+│              VardrScanner                 │
+├───────────────────────────────────────────┤
+│                                           │
+│  ┌────────────────────────────────────┐   │
+│  │   Core Engine (Transport Layer)    │   │
+│  │   • HTTP session management        │   │
+│  │   • Authentication handlers        │   │
+│  │   • Rate limiting & retry logic    │   │
+│  └────────────┬───────────────────────┘   │
+│               │                           │
+│               ▼                           │
+│  ┌────────────────────────────────────┐   │
+│  │   ScanContext (Abstraction)        │   │
+│  │   • Isolates modules from engine   │   │
+│  │   • Clean interface: request(),    │   │
+│  │     add_finding(), logger          │   │
+│  └────────────┬───────────────────────┘   │
+│               │                           │
+│               ▼                           │
+│  ┌────────────────────────────────────┐   │
+│  │   Security Modules (Plugins)       │   │
+│  │   • API1: BOLA/IDOR                │   │
+│  │   • API2: Broken Authentication    │   │
+│  │   • API3: Property-Level Authz     │   │
+│  └────────────┬───────────────────────┘   │
+│               │                           │
+│               ▼                           │
+│  ┌────────────────────────────────────┐   │
+│  │   Reporting Engine                 │   │
+│  │   • Text, JSON, HTML outputs       │   │
+│  │   • Evidence collection            │   │
+│  └────────────────────────────────────┘   │
+│                                           │
+└───────────────────────────────────────────┘
 ```
 
 **Key Design Decisions:**
